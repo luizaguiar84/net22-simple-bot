@@ -1,4 +1,6 @@
-﻿using SimpleBotCore.Bot;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using SimpleBotCore.Bot;
 using SimpleBotCore.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,10 +12,14 @@ namespace SimpleBotCore.Logic
     public class SimpleBot : BotDialog
     {
         IUserProfileRepository _userProfile;
+        private readonly IPerguntas _perguntas;
 
-        public SimpleBot(IUserProfileRepository userProfile)
+        public SimpleBot(
+            IUserProfileRepository userProfile, 
+            IPerguntas perguntas)
         {
             _userProfile = userProfile;
+            _perguntas = perguntas;
         }
 
         protected async override Task BotConversation()
@@ -63,6 +69,13 @@ namespace SimpleBotCore.Logic
                 _userProfile.AtualizaCor(UserId, user.Cor);
             }
 
+            var userData = new BsonDocument()
+            {
+                { "Username", user.Nome },
+                {"Idade", user.Idade },
+                {"Cor", user.Cor }
+            };
+
             await WriteAsync($"{user.Nome}, bem vindo ao Oraculo. Você tem direito a 3 perguntas");
 
             for(int i=0; i<3; i++)
@@ -73,8 +86,7 @@ namespace SimpleBotCore.Logic
                 {
                     await WriteAsync("Processando...");
 
-                    // FAZER: GRAVAR AS PERGUNTAS EM UM BANCO DE DADOS
-                    await Task.Delay(5000);
+                    _perguntas.Perguntar(texto);
 
                     await WriteAsync("Resposta não encontrada");
                 }
