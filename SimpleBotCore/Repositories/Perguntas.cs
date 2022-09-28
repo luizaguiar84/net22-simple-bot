@@ -5,6 +5,12 @@ namespace SimpleBotCore.Repositories
 {
     public class Perguntas : IPerguntas
     {
+        private readonly IMongoDb _mongoDb;
+
+        public Perguntas(IMongoDb mongoDb)
+        {
+            this._mongoDb = mongoDb;
+        }
         public string Perguntar(string pergunta)
         {
             var doc = new BsonDocument()
@@ -12,18 +18,9 @@ namespace SimpleBotCore.Repositories
                 { "Pergunta", pergunta }
             };
 
-            Insert(doc);
+            _mongoDb.Insert(doc);
 
             return string.Empty;
-        }
-
-        private void Insert(BsonDocument doc)
-        {
-            var client = new MongoClient("mongodb://localhost:27017");
-            var db = client.GetDatabase("net2022");
-            var col = db.GetCollection<BsonDocument>("simpleBot");
-
-            col.InsertOne(doc);
         }
     }
 }
