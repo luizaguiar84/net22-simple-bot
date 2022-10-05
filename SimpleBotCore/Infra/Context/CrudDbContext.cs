@@ -7,8 +7,8 @@ namespace SimpleBotCore.Infra.Context
 {
     public class CrudDbContext : DbContext
 	{
-		private readonly IConfiguration _configuration;
-		public DbSet<SimpleUser> Lead { get; set; }
+		private IConfiguration _configuration;
+		public DbSet<SimpleUser> SimpleUsers { get; set; }
 		public CrudDbContext(DbContextOptions dbContextOptions)
 		{ }
 
@@ -27,10 +27,14 @@ namespace SimpleBotCore.Infra.Context
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			if (!optionsBuilder.IsConfigured)
-			{
-				optionsBuilder.UseSqlServer(_configuration.GetConnectionString("SqlServer"));
+            if (!optionsBuilder.IsConfigured)
+            {
+                if (_configuration == null)
+                	_configuration = Startup.Configuration;
+                
+				optionsBuilder.UseSqlServer(_configuration[$"ConnectionStrings:SqlServer"]);
 			}
+
 			base.OnConfiguring(optionsBuilder);
 		}
 	}

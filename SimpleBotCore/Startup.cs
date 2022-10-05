@@ -16,7 +16,7 @@ namespace SimpleBotCore
     public class Startup
     {
         public Infra.DatabaseConfiguration DatabaseConfiguration { get; }
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; set; }
 
 
         public Startup(IConfiguration configuration)
@@ -36,9 +36,8 @@ namespace SimpleBotCore
             }
             else
             {
-                services.AddSingleton<IMongoDb>(new MongoDb());
             }
-
+            services.AddSingleton<IMongoDb>(new MongoDb());
             services.AddSingleton<IUserProfileRepository>(new UserProfileMockRepository());
             services.AddSingleton<IBotDialogHub, BotDialogHub>();
             services.AddSingleton<IPerguntas, Perguntas>();

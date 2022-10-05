@@ -29,7 +29,7 @@ namespace SimpleBotCore.Infra
                 throw new NotSupportedException($"Invalid ConnectionString name '{ConnectionStringName}'.");
             }
 
-            ConnectionString = configuration[$"ConnectionStrings:{ConnectionStringName}"];
+            ConnectionString = configuration[$"ConnectionStrings:SqlServer"];
         }
 
         public enum DatabaseType
