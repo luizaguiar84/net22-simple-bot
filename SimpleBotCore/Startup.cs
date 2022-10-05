@@ -30,13 +30,11 @@ namespace SimpleBotCore
         public void ConfigureServices(IServiceCollection services)
         {
 
-            if (DatabaseConfiguration.DbType == Infra.DatabaseConfiguration.DatabaseType.SqlServer)
+            if (DatabaseConfiguration.DbType == DatabaseConfiguration.DatabaseType.SqlServer)
             {
                 services.AddSqlServerDependency(DatabaseConfiguration);
             }
-            else
-            {
-            }
+            
             services.AddSingleton<IMongoDb>(new MongoDb());
             services.AddSingleton<IUserProfileRepository>(new UserProfileMockRepository());
             services.AddSingleton<IBotDialogHub, BotDialogHub>();

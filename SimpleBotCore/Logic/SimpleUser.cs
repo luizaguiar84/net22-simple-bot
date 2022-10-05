@@ -8,9 +8,7 @@ namespace SimpleBotCore.Logic
     public class SimpleUser
     {
         public SimpleUser()
-        {
-
-        }
+        {}
 
         public SimpleUser(string userId)
         {
@@ -21,7 +19,6 @@ namespace SimpleBotCore.Logic
         public string Nome { get; set; }
         public int Idade { get; set; }
         public string Cor { get; set; }
-
        
     }
 }

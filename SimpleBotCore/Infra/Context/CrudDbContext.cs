@@ -32,7 +32,7 @@ namespace SimpleBotCore.Infra.Context
                 if (_configuration == null)
                 	_configuration = Startup.Configuration;
                 
-				optionsBuilder.UseSqlServer(_configuration[$"ConnectionStrings:SqlServer"]);
+				optionsBuilder.UseSqlServer(_configuration[$"SqlServer"]);
 			}
 
 			base.OnConfiguring(optionsBuilder);

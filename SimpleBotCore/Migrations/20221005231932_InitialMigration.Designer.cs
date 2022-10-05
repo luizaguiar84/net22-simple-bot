@@ -11,7 +11,7 @@ using SimpleBotCore.Infra.SqlServer;
 namespace SimpleBotCore.Migrations
 {
     [DbContext(typeof(SqlServerCrudDbContext))]
-    [Migration("20221005231204_InitialMigration")]
+    [Migration("20221005231932_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
