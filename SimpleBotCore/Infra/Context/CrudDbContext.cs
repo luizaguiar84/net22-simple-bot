@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using SimpleBotCore.Entities;
 using SimpleBotCore.Infra.Builders;
 using SimpleBotCore.Logic;
 
@@ -9,6 +10,8 @@ namespace SimpleBotCore.Infra.Context
     {
         private IConfiguration _configuration;
         public DbSet<SimpleUser> SimpleUsers { get; set; }
+        public DbSet<Pergunta> Perguntas { get; set; }
+
         public CrudDbContext(DbContextOptions dbContextOptions)
         {
             if (_configuration == null)
@@ -24,6 +27,7 @@ namespace SimpleBotCore.Infra.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SimpleUserConfiguration());
+            modelBuilder.ApplyConfiguration(new PerguntaConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -4,11 +4,11 @@ using SimpleBotCore.Repositories.Interfaces;
 
 namespace SimpleBotCore.Repositories
 {
-    public class Perguntas : IPerguntas
+    public class PerguntasMongoRepository : IPerguntas
     {
         private readonly IMongoDb _mongoDb;
 
-        public Perguntas(IMongoDb mongoDb)
+        public PerguntasMongoRepository(IMongoDb mongoDb)
         {
             this._mongoDb = mongoDb;
         }

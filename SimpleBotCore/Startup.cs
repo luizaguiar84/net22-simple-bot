@@ -33,17 +33,21 @@ namespace SimpleBotCore
             if (DatabaseConfiguration.DbType == DatabaseConfiguration.DatabaseType.SqlServer)
             {
                 services.AddSqlServerDependency(DatabaseConfiguration);
+                services.AddTransient<IPerguntas, PerguntasSqlServerRepository>();
+                services.AddSingleton<IUserProfileRepository>(new UserProfileMockRepository());
+                services.AddTransient<IBotDialogHub, BotDialogHub>();
+                services.AddTransient<BotDialog, SimpleBot>();
+
             }
 
             if (DatabaseConfiguration.DbType == DatabaseConfiguration.DatabaseType.MongoDb)
             {
+                services.AddTransient<IPerguntas, PerguntasMongoRepository>();
                 services.AddSingleton<IMongoDb>(new MongoDb(DatabaseConfiguration));
+                services.AddSingleton<IUserProfileRepository>(new UserProfileMockRepository());
+                services.AddSingleton<IBotDialogHub, BotDialogHub>();
+                services.AddSingleton<BotDialog, SimpleBot>();
             }
-
-            services.AddSingleton<IUserProfileRepository>(new UserProfileMockRepository());
-            services.AddSingleton<IBotDialogHub, BotDialogHub>();
-            services.AddSingleton<IPerguntas, Perguntas>();
-            services.AddSingleton<BotDialog, SimpleBot>();
 
             services.AddControllers();
         }
