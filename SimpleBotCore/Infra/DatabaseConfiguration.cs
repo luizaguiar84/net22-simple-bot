@@ -21,7 +21,6 @@ namespace SimpleBotCore.Infra
             if (DatabaseType.MongoDb.ToString().Equals(ConnectionStringName, StringComparison.CurrentCultureIgnoreCase))
             {
                 DbType = DatabaseType.MongoDb;
-                ConnectionString = configuration[$"MongoDb.ConnectionString"];
                 Database = configuration[$"MongoDb.Database"];
                 Collection = configuration[$"MongoDb.Collection"];
             }
