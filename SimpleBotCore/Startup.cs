@@ -6,10 +6,10 @@ using Microsoft.Extensions.Hosting;
 using SimpleBotCore.Bot;
 using SimpleBotCore.ExtensionMethods;
 using SimpleBotCore.Infra;
+using SimpleBotCore.Infra.MongoDb;
 using SimpleBotCore.Logic;
 using SimpleBotCore.Repositories;
-using System;
-
+using SimpleBotCore.Repositories.Interfaces;
 
 namespace SimpleBotCore
 {
@@ -29,16 +29,17 @@ namespace SimpleBotCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string ConnectionString = Configuration[$"MongoDb.ConnectionString"];
-            string Database = Configuration[$"MongoDb.Database"];
-            string Collection = Configuration[$"MongoDb.Collection"];
 
             if (DatabaseConfiguration.DbType == DatabaseConfiguration.DatabaseType.SqlServer)
             {
                 services.AddSqlServerDependency(DatabaseConfiguration);
             }
 
-            services.AddSingleton<IMongoDb>(new MongoDb(ConnectionString, Database, Collection));
+            if (DatabaseConfiguration.DbType == DatabaseConfiguration.DatabaseType.MongoDb)
+            {
+                services.AddSingleton<IMongoDb>(new MongoDb(DatabaseConfiguration));
+            }
+
             services.AddSingleton<IUserProfileRepository>(new UserProfileMockRepository());
             services.AddSingleton<IBotDialogHub, BotDialogHub>();
             services.AddSingleton<IPerguntas, Perguntas>();

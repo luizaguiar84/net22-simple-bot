@@ -1,10 +1,7 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Driver;
 using SimpleBotCore.Bot;
-using SimpleBotCore.Repositories;
+using SimpleBotCore.Repositories.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SimpleBotCore.Logic

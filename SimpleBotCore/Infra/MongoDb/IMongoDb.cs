@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 
-namespace SimpleBotCore.Repositories
+namespace SimpleBotCore.Infra.MongoDb
 {
     public interface IMongoDb
     {

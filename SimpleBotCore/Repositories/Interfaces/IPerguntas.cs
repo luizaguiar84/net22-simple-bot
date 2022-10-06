@@ -1,4 +1,4 @@
-﻿namespace SimpleBotCore.Repositories
+﻿namespace SimpleBotCore.Repositories.Interfaces
 {
     public interface IPerguntas
     {

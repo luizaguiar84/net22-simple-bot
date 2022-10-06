@@ -8,21 +8,28 @@ namespace SimpleBotCore.Infra
     {
         public string ConnectionStringName { get; }
         public string ConnectionString { get; }
+        public string Database { get; }
+        public string Collection { get; }
+
         public DatabaseType DbType { get; }
 
         public DatabaseConfiguration(IConfiguration configuration)
         {
             ConnectionStringName = configuration["DefaultConnectionString"];
 
-           
+
             if (DatabaseType.MongoDb.ToString().Equals(ConnectionStringName, StringComparison.CurrentCultureIgnoreCase))
             {
                 DbType = DatabaseType.MongoDb;
+                ConnectionString = configuration[$"MongoDb.ConnectionString"];
+                Database = configuration[$"MongoDb.Database"];
+                Collection = configuration[$"MongoDb.Collection"];
             }
+
             else if (DatabaseType.SqlServer.ToString().Equals(ConnectionStringName, StringComparison.CurrentCultureIgnoreCase))
             {
                 DbType = DatabaseType.SqlServer;
-            }           
+            }
 
             else
             {

@@ -1,4 +1,5 @@
 ﻿using SimpleBotCore.Logic;
+using SimpleBotCore.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 

@@ -1,4 +1,6 @@
-﻿namespace SimpleBotCore.Repositories
+﻿using SimpleBotCore.Repositories.Interfaces;
+
+namespace SimpleBotCore.Repositories
 {
     public class PerguntasMock : IPerguntas
     {

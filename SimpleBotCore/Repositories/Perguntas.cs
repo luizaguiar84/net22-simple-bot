@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Driver;
+using SimpleBotCore.Infra.MongoDb;
+using SimpleBotCore.Repositories.Interfaces;
 
 namespace SimpleBotCore.Repositories
 {
